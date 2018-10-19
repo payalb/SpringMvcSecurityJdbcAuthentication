@@ -25,7 +25,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().dataSource(ds).usersByUsernameQuery("select * from users where username = ?")
+		auth.jdbcAuthentication().dataSource(ds).usersByUsernameQuery("select username, password, 'true' as enabled from users where username = ?")
 				.authoritiesByUsernameQuery("select username, authority from roles where username = ?")
 				.passwordEncoder(getEncoder());
 		;
